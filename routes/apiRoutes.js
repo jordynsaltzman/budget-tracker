@@ -12,9 +12,11 @@ const apiRoutes = app => {
   });
 
   app.get("/api/budget", (req, res) => {
-    db.Budget.find({}).then(allTransactions => {
-      res.json(allTransactions);
-    });
+    db.Budget.find({})
+      .sort({ date: 1 })
+      .then(allTransactions => {
+        res.json(allTransactions);
+      });
   });
 };
 module.exports = apiRoutes;
