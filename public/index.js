@@ -10,7 +10,8 @@ $("#add-btn").on("click", event => {
   event.preventDefault();
   const newBudget = {
     transaction: $("#transaction").val(),
-    amount: $("#amount").val()
+    amount: $("#amount").val(),
+    date: Date.now()
   };
 
   $.post("/api/budget/deposit", newBudget).then(data => {
@@ -22,7 +23,8 @@ $("#sub-btn").on("click", event => {
   event.preventDefault();
   const newBudget = {
     transaction: $("#transaction").val(),
-    amount: "-" + $("#amount").val()
+    amount: "-" + $("#amount").val(),
+    date: Date.now()
   };
 
   $.post("/api/budget/withdraw", newBudget).then(data => {
@@ -33,12 +35,29 @@ $("#sub-btn").on("click", event => {
 
 const displayData = data => {
   $("#tbody").empty();
+
   let totalAmount = 0;
   for (let i = 0; i < data.length; i++) {
     let tr = $("<tr>");
     let td1 = $("<td>").text(data[i].transaction);
-    let td2 = $("<td>").text(data[i].amount);
-    tr.append(td1, td2);
+    let td2 = $("<td>").text("$" + data[i].amount);
+    console.log(td2.style);
+    console.log(td2[0].innerText);
+
+    if (td2[0].innerText.indexOf("-") === -1) {
+      td2.css({ color: "#34a853" });
+    } else {
+      td2.css({ color: "#ff5a59" });
+    }
+
+    let year = data[i].date.slice(0, 4);
+    let month = data[i].date.slice(6, 7);
+    let day = data[i].date.slice(8, 10);
+    let date = month + "/" + day + "/" + year;
+
+    let td3 = $("<td>").text(date);
+
+    tr.append(td3, td1, td2);
     $("#tbody").append(tr);
 
     totalAmount += parseFloat(data[i].amount);

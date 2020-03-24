@@ -8,35 +8,50 @@
 
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
     />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:500,800|Raleway&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="/style.css" />
     <title>Budget Tracker</title>
   </head>
 
   <body>
-    <div class="wrapper">
-      <div class="total">
-        <div>Your total is: $<span id="total">0</span></div>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Budget Tracker</h1>
+        <p class="lead">Manage your money with this simple app.</p>
       </div>
+    </div>
+    <div class="wrapper">
+      <div class="row formRow">
+        <div class="col-md-12">
+          <p class="lead">Your current total is: $<span id="total">0</span></p>
+          <form>
+            <label for="transaction">Transaction Name:</label>
+            <input type="text" id="transaction" placeholder="Name" />
 
-      <form>
-        <label for="transaction">Transaction Name:</label>
-        <input type="text" id="transaction" placeholder="Name" />
+            <label for="amount">Transaction Amount:</label>
+            <input type="number" min="0" id="amount" placeholder="Amount" />
 
-        <label for="amount">Transaction Amount:</label>
-        <input type="number" min="0" id="amount" placeholder="Amount" />
-
-        <div class="transaction-buttons">
-          <button id="add-btn"><i class="fa fa-plus"></i> Deposit</button>
-          <button id="sub-btn"><i class="fa fa-minus"></i> Withdraw</button>
+            <div class="transaction-buttons">
+              <button id="add-btn"><i class="fa fa-plus"></i> Deposit</button>
+              <button id="sub-btn"><i class="fa fa-minus"></i> Withdraw</button>
+            </div>
+          </form>
         </div>
-        <p role="alert" class="error"></p>
-      </form>
+      </div>
 
       <div class="transactions">
         <table>
           <thead>
+            <th>Date</th>
             <th>Transaction</th>
             <th>Amount</th>
           </thead>
@@ -47,12 +62,12 @@
       <canvas id="my-chart"></canvas>
     </div>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="/index.js"></script>
 
-    <script>
+    <!-- <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker.register("service-worker.js").then(reg => {
@@ -60,6 +75,6 @@
           });
         });
       }
-    </script>
+    </script> -->
   </body>
 </html>
