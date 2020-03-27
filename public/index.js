@@ -14,9 +14,16 @@ $("#add-btn").on("click", event => {
     date: Date.now()
   };
 
-  $.post("/api/budget/deposit", newBudget).then(data => {
-    console.log(data);
-  });
+  $.post("/api/budget/deposit", newBudget)
+    .then(data => {
+      console.log(data);
+      displayData(data);
+      transactions = data;
+    })
+    .catch(err => {
+      saveRecord(newBudget);
+      displayData(transactions);
+    });
 });
 
 $("#sub-btn").on("click", event => {
@@ -27,21 +34,30 @@ $("#sub-btn").on("click", event => {
     date: Date.now()
   };
 
-  $.post("/api/budget/withdraw", newBudget).then(data => {
-    console.log(data);
-    displayData(data);
-  });
+  $.post("/api/budget/withdraw", newBudget)
+    .then(data => {
+      console.log(data);
+      displayData(data);
+      transactions = data;
+    })
+    .catch(err => {
+      saveRecord(newBudget);
+      displayData(transactions);
+    });
 });
 
 const displayData = data => {
   $("#tbody").empty();
+  data.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
 
   let totalAmount = 0;
   for (let i = 0; i < data.length; i++) {
     let tr = $("<tr>");
     let td1 = $("<td>").text(data[i].transaction);
     let td2 = $("<td>").text("$" + data[i].amount);
-    console.log(td2.style);
+
     console.log(td2[0].innerText);
 
     if (td2[0].innerText.indexOf("-") === -1) {
@@ -62,6 +78,7 @@ const displayData = data => {
 
     totalAmount += parseFloat(data[i].amount);
   }
+
   $("#total").text(totalAmount);
 };
 

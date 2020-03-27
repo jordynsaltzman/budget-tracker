@@ -18,5 +18,15 @@ const apiRoutes = app => {
         res.json(allTransactions);
       });
   });
+
+  app.post("/api/budget/bulk", ({ body }, res) => {
+    db.Budget.insertMany(body)
+      .then(allTransactions => {
+        res.json(allTransactions);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  });
 };
 module.exports = apiRoutes;
