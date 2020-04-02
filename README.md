@@ -4,7 +4,7 @@ A Progressive Web Application to track your budget, utilizing MongoDB, IndexedDB
 
 Visit deployed site [here.](https://jordyns-budget-tracker.herokuapp.com/)
 
-To create this application, I used the Service Worker and Cache APIs to cache assets and API responses to ensure the application works without an internet connection. Users can enter transactions while offline, and When brought back online, the withdrawals, deposits, and account balance will populate accordingly.
+To create this application, I used the Service Worker and Cache APIs to cache assets and API responses to ensure the application works without an internet connection. Users can enter transactions while offline, and when brought back online, the withdrawals, deposits, and account balance will populate accordingly.
 
 ## Preview
 
